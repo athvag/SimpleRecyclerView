@@ -15,16 +15,18 @@ import java.util.List;
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder> {
 
     private List<Student> student;
+    private ItemClickCallback callback;
 
-    public StudentsAdapter(List<Student> student) {
+    public StudentsAdapter(List<Student> student, ItemClickCallback listener) {
         this.student = student;
+        this.callback = listener;
     }
 
     @NonNull
     @Override
     public StudentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_students, parent, false);
-        return new StudentsViewHolder(view);
+        return new StudentsViewHolder(view,callback);
     }
 
     @Override

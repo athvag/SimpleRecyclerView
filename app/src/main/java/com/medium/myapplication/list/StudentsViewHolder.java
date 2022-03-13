@@ -13,9 +13,11 @@ import java.util.List;
 public class StudentsViewHolder extends RecyclerView.ViewHolder {
 
     TextView studentName,studentClass,studentBirthDate;
+    private ItemClickCallback callback;
 
-    public StudentsViewHolder(@NonNull View itemView) {
+    public StudentsViewHolder(@NonNull View itemView, ItemClickCallback listener) {
         super(itemView);
+        this.callback = listener;
 
         studentName = itemView.findViewById(R.id.item_students_name);
         studentClass = itemView.findViewById(R.id.item_students_class);
@@ -27,6 +29,13 @@ public class StudentsViewHolder extends RecyclerView.ViewHolder {
         studentName.setText(name);
         studentClass.setText(studentCl);
         studentBirthDate.setText("Date of Birth: " + date);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onItemClicked(v,name,date,studentCl);
+            }
+        });
     }
 
 }
